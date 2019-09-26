@@ -1,22 +1,114 @@
-table.main-view__table {
+#main-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin:auto 0;
+    clear:both;
+    margin-top: 4rem;
+    position: relative;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+table.main-view-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 3px;
+    border-spacing: 0.3rem;
 }
 
 thead{
     color: white;
     background-color: #269adb;
     text-align: left;
-    font-size: 16px;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 th{
-    height: 30px;
+    height: 3rem;
     text-align: center;
 }
 
 tbody{
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: bold;
+}
+
+.main-view-add-btn-box {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.main-view-add-btn {
+    margin-left: 1rem;
+    margin-top: 3rem;
+    width: 20rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+    -moz-box-shadow:inset 0px 39px 0px -24px #64ac48;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #64ac48;
+    box-shadow:inset 0px 39px 0px -24px #64ac48;
+    background-color:#64ac48;
+}
+
+.table-options-buttons-edit, .modal-buttons-cancel {
+    -moz-box-shadow:inset 0px 39px 0px -24px #269adb;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #269adb;
+    box-shadow:inset 0px 39px 0px -24px #269adb;
+    background-color:#269adb;
+}
+
+.table-options-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.table-btn {
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.table-options-buttons-edit, .modal-buttons-cancel {
+    -moz-box-shadow:inset 0px 39px 0px -24px #269adb;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #269adb;
+    box-shadow:inset 0px 39px 0px -24px #269adb;
+    background-color:#269adb;
+}
+
+.table-options-buttons-remove, .modal-buttons-remove {
+    -moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+    box-shadow:inset 0px 39px 0px -24px #e67a73;
+    background-color:#e4685d;
+}
+
+.modal-content-question {
+    font-size: 2rem;
+    margin: 4rem 2rem 4rem 2rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 3rem;
+    padding-right: 5rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.modal-buttons-remove, .modal-buttons-cancel {
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
 }

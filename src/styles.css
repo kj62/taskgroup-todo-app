@@ -1,2 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ngx-smart-modal/ngx-smart-modal";
+
+html{
+    font-size: 10px;
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    font-family: Candara,"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;;
+    font-size: 2rem;
+    color: #000;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    font-family: Candara,"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}

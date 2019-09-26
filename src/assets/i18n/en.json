@@ -2,7 +2,8 @@
     "APP": {
         "HEADERS": {
             "NAME": "Name",
-            "NUMBER_OF_TASKS": "Number of tasks"
+            "NUMBER_OF_TASKS": "Number of tasks",
+            "OPTIONS": "Options"
         },
         "TASK_STATUS": {
             "NEW": "New",
@@ -12,6 +13,12 @@
         "MODAL": {
             "TITLE": "Confirm removal",
             "CONFIRMATION_QUESTION": "Are you sure you want to remove selected task group?"
+        },
+        "BUTTONS": {
+            "REMOVE": "Remove",
+            "EDIT": "Edit",
+            "CANCEL": "Cancel",
+            "ADD_TASK": "Add task"
         }
     }
 }

@@ -58,7 +58,7 @@ export class MainViewComponent implements OnInit {
 
   }
 
-  removeSelectedTaskGroupHandler(selectedTaskGroup) {
+  removeSelectedTaskGroupConfirmHandler(selectedTaskGroup) {
     // TODO remove selected taskgroup
     this.ngxSmartModalService.getModal("removalConfirmationModal").close();
   }

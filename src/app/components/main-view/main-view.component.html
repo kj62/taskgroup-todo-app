@@ -1,29 +1,34 @@
 <div id="main-view">
-    <table class="main-view__table">
+    <table class="main-view-table">
         <thead>
             <tr>
                 <td>{{ 'APP.HEADERS.NAME' | translate }}</td>
                 <td>{{ 'APP.HEADERS.NUMBER_OF_TASKS' | translate }}</td>
+                <td>{{ 'APP.HEADERS.OPTIONS' | translate }}</td>
             </tr>
         </thead>
         <tbody *ngFor="let userTask of userTasks">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{userTask.name}}</td>
+                <td>{{userTask.userId.length}}</td>
+                <td class="table-options-buttons">
+                    <button class="table-btn table-options-buttons-edit" (click)="editTaskGroupClickHandler(userTask)">{{ 'APP.BUTTONS.EDIT' | translate }}</button>
+                    <button class="table-btn table-options-buttons-remove" (click)="removeTaskGroupClickHandler(userTask)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+                </td>
             </tr>
         </tbody>
     </table>
+    <div class="main-view-add-btn-box">
+        <button class="main-view-add-btn" (click)="createTaskGroupClickHandler()">{{ 'APP.BUTTONS.ADD_TASK' | translate }}</button>
+    </div>
 </div>
 
 <ngx-smart-modal #removalConfirmationModal identifier="removalConfirmationModal" title="{{ 'APP.MODAL.TITLE' | translate }}">
-    <div class="modal-content">
-        <div class="modal-content-question">
-            <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }}:</p>
-        </div>
+    <div class="modal-content-question">
+        <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }}</p>
     </div>
     <div class="modal-buttons">
-        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupHandler(selectedTaskGroup)"></button>
-        <button class="modal-buttons-cancel" (click)="closeModalHandler()"></button>
+        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupConfirmHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+        <button class="modal-buttons-cancel" (click)="closeModalHandler()">{{ 'APP.BUTTONS.CANCEL' | translate }}</button>
     </div>
 </ngx-smart-modal>
