@@ -46,16 +46,17 @@ export class MainViewComponent implements OnInit {
     ];
   }
 
-  removeTaskGroupClickHandler(taskGroupElement: TaskGroup) {
+  removeTaskGroupClickHandler(taskGroup: TaskGroup) {
     this.ngxSmartModalService.getModal("removalConfirmationModal").open();
   }
 
-  editTaskGroupClickHandler(taskGroupElement: TaskGroup) {
-
+  editTaskGroupClickHandler(taskGroup: TaskGroup) {
+    this.sharingService.setSelectedTaskGroup(taskGroup);
+    this.sharingService.route("edition");
   }
 
   createTaskGroupClickHandler() {
-
+    this.sharingService.route("edition");
   }
 
   removeSelectedTaskGroupConfirmHandler(selectedTaskGroup) {
