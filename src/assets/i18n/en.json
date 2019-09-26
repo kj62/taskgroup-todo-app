@@ -1,0 +1,17 @@
+{
+    "APP": {
+        "HEADERS": {
+            "NAME": "Name",
+            "NUMBER_OF_TASKS": "Number of tasks"
+        },
+        "TASK_STATUS": {
+            "NEW": "New",
+            "IN_PROGRESS": "InProgress",
+            "COMPLETED": "Completed"
+        },
+        "MODAL": {
+            "TITLE": "Confirm removal",
+            "CONFIRMATION_QUESTION": "Are you sure you want to remove selected task group?"
+        }
+    }
+}

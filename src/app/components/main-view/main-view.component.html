@@ -2,12 +2,11 @@
     <table class="main-view__table">
         <thead>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ 'APP.HEADERS.NAME' | translate }}</td>
+                <td>{{ 'APP.HEADERS.NUMBER_OF_TASKS' | translate }}</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let userTask of userTasks">
             <tr>
                 <td></td>
                 <td></td>
@@ -16,3 +15,15 @@
         </tbody>
     </table>
 </div>
+
+<ngx-smart-modal #removalConfirmationModal identifier="removalConfirmationModal" title="{{ 'APP.MODAL.TITLE' | translate }}">
+    <div class="modal-content">
+        <div class="modal-content-question">
+            <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }}:</p>
+        </div>
+    </div>
+    <div class="modal-buttons">
+        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupHandler(selectedTaskGroup)"></button>
+        <button class="modal-buttons-cancel" (click)="closeModalHandler()"></button>
+    </div>
+</ngx-smart-modal>

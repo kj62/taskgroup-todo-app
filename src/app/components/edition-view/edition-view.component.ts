@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharingService } from '../../services/sharing.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edition-view',
@@ -8,7 +9,13 @@ import { SharingService } from '../../services/sharing.service';
 })
 export class EditionViewComponent implements OnInit {
 
-  constructor(private sharingService: SharingService) { }
+  constructor(
+    private sharingService: SharingService,
+    private translate: TranslateService
+  )
+  {
+
+  }
 
   ngOnInit() {
   }
