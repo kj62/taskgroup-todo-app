@@ -1,6 +1,7 @@
 <div id="edition-view">
     <div class="edition-view-main-box">
         <div class="edition-view-top-box">
+            <input type="text" name="taskGroupName" value="asdads"/>
         </div>
         <div class="edition-view-columns-box">
             <div class="edition-view-column-user-tasks-list">
@@ -11,6 +12,7 @@
                             <td>{{ 'APP.HEADERS.DEADLINE' | translate }}</td>
                             <td>{{ 'APP.HEADERS.USER_ID' | translate }}</td>
                             <td>{{ 'APP.HEADERS.STATUS' | translate }}</td>
+                            <td>{{ 'APP.HEADERS.OPTIONS' | translate }}</td>
                         </tr>
                     </thead>
                     <tbody *ngFor="let userTask of userTasks">
@@ -20,14 +22,42 @@
                             <td>{{userTask.userId}}</td>
                             <td>{{userTask.status}}</td>
                             <td class="user-tasks-table-options-buttons">
-                                <button class="user-tasks-table-options-buttons-remove" (click)="removeTaskGroupClickHandler(userTask)"></button>
+                                <button class="user-tasks-table-options-buttons-remove" (click)="removeTaskGroupClickHandler(userTask)">
+                                    <span class="icon"></span>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="edition-view-column-user-tasks-form">
-                
+                <form [formGroup]="userTaskForm" class="user-task-form">
+                    <div class="form-control-box">
+                        <label for="name">{{ 'APP.HEADERS.NAME' | translate }}</label>
+                        <input type="text" name="name" formControlName="name"/>
+                    </div>
+                    
+                    <div class="form-control-box">
+                        <label for="deadline">{{ 'APP.HEADERS.DEADLINE' | translate }}</label>
+                        <input type="text" name="deadline" formControlName="deadline"/>
+                    </div>
+                    
+                    <div class="form-control-box">
+                        <label for="userId">{{ 'APP.HEADERS.USER_ID' | translate }}</label>
+                        <input type="text" name="userId" formControlName="userId"/>
+                    </div>
+                    
+                    <div class="form-control-box">
+                        <label for="status">{{ 'APP.HEADERS.STATUS' | translate }}</label>
+                        <select name="status" formControlName="status">
+                            <option >{{'ACTIVE' | translate}}</option>
+                            <option >{{'BLOCKED' | translate}}</option>
+                            <option >{{'CREATED' | translate}}</option>
+                        </select>
+                    </div>
+                    
+                    <button class="form-submit-btn" type="submit">{{ 'APP.BUTTONS.ADD_TASK' | translate }}</button>
+                </form>    
             </div>
         </div>
     </div>
