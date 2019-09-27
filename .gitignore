@@ -8,6 +8,7 @@
 /bazel-out
 
 # dependencies
+/addons/fake-json-server/node_modules
 /node_modules
 
 # profiling files

@@ -7,6 +7,8 @@ import { ViewChild } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { UserTask } from '../../models/UserTask.model';
 
+import { examples } from '../../utils/examples';
+
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
@@ -30,20 +32,7 @@ export class MainViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userTasks = [
-      {
-        "name": "task1",
-        "deadline": new Date(),
-        "userId": "asadafafasf",
-        "status": "New"
-      },
-      {
-        "name": "task2",
-        "deadline": new Date(),
-        "userId": "fasf",
-        "status": "New"
-      }
-    ];
+    // this.taskGroupList = examples.taskGroupList;
   }
 
   removeTaskGroupClickHandler(taskGroup: TaskGroup) {

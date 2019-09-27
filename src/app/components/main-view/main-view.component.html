@@ -7,13 +7,13 @@
                 <td>{{ 'APP.HEADERS.OPTIONS' | translate }}</td>
             </tr>
         </thead>
-        <tbody *ngFor="let userTask of userTasks">
+        <tbody *ngFor="let taskGroup of taskGroupList">
             <tr>
-                <td>{{userTask.name}}</td>
-                <td>{{userTask.userId.length}}</td>
+                <td>{{taskGroup.name}}</td>
+                <td>{{taskGroup.userTasks.length}}</td>
                 <td class="table-options-buttons">
-                    <button class="table-btn table-options-buttons-edit" (click)="editTaskGroupClickHandler(userTask)">{{ 'APP.BUTTONS.EDIT' | translate }}</button>
-                    <button class="table-btn table-options-buttons-remove" (click)="removeTaskGroupClickHandler(userTask)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+                    <button class="table-btn table-options-buttons-edit" (click)="editTaskGroupClickHandler(taskGroup)">{{ 'APP.BUTTONS.EDIT' | translate }}</button>
+                    <button class="table-btn table-options-buttons-remove" (click)="removeTaskGroupClickHandler(taskGroup)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
                 </td>
             </tr>
         </tbody>

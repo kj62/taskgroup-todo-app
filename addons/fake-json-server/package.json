@@ -1,0 +1,14 @@
+{
+  "name": "fake-json-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Krzysztof Janosz",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.15.1"
+  }
+}
