@@ -47,11 +47,11 @@ export class SharingService {
     this.router.navigate([path]);
   }
 
-  getSelectedTaskGroup() {
-    return this.selectedTaskGroup;
+  getSelectedTaskGroup(): Observable<any> {
+    return this.selectedTaskGroup.asObservable();
   }
 
   setSelectedTaskGroup(taskGroup) {
-    this.selectedTaskGroup = taskGroup;
+    this.selectedTaskGroup.next(taskGroup);
   }
 }

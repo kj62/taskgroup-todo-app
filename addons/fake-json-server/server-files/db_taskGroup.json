@@ -1,16 +1,43 @@
 {
-	"taskGroups":[
-		{
-			"name": "Car",
-			"deadline": "03.07.2019",
-			"userId": "asd",
-			"status": "New"
-		},
-		{
-			"name": "Work",
-			"deadline": "03.08.2019",
-			"userId": "qwe",
-			"status": "New"
-		}
-	]
+  "taskGroupList": [
+    {
+      "name": "Car",
+      "userTasks": [
+        {
+          "name": "t1",
+          "deadline": "03.07.2019",
+          "userId": "asd",
+          "status": "New"
+        }
+      ]
+    },
+    {
+      "name": "Work",
+      "userTasks": [
+        {
+          "name": "t2",
+          "deadline": "05.07.2019",
+          "userId": "qwe",
+          "status": "InProgress"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Krystian",
+      "lastName": "Nowak"
+    },
+    {
+      "id": 2,
+      "firstName": "Maciej",
+      "lastName": "Kowalski"
+    },
+    {
+      "id": 3,
+      "firstName": "Zbigniew",
+      "lastName": "Czajka"
+    }
+  ]
 }

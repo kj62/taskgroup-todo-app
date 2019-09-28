@@ -40,7 +40,7 @@ tbody{
     justify-content: flex-start;
 }
 
-.main-view-add-btn {
+.main-view-btn {
     margin-left: 1rem;
     margin-top: 3rem;
     width: 20rem;
@@ -48,40 +48,23 @@ tbody{
     color: white;
     font-size: 1.6rem;
     font-weight: 700;
+}
+
+.main-view-add-btn {
     -moz-box-shadow:inset 0px 39px 0px -24px #64ac48;
     -webkit-box-shadow:inset 0px 39px 0px -24px #64ac48;
     box-shadow:inset 0px 39px 0px -24px #64ac48;
     background-color:#64ac48;
 }
 
-.table-options-buttons-edit, .modal-buttons-cancel {
+.main-view-edit-btn, .modal-buttons-cancel {
     -moz-box-shadow:inset 0px 39px 0px -24px #269adb;
     -webkit-box-shadow:inset 0px 39px 0px -24px #269adb;
     box-shadow:inset 0px 39px 0px -24px #269adb;
     background-color:#269adb;
 }
 
-.table-options-buttons {
-    display: flex;
-    justify-content: center;
-}
-
-.table-btn {
-    width: 10rem;
-    height: 3rem;
-    color: white;
-    font-size: 1.6rem;
-    font-weight: 700;
-}
-
-.table-options-buttons-edit, .modal-buttons-cancel {
-    -moz-box-shadow:inset 0px 39px 0px -24px #269adb;
-    -webkit-box-shadow:inset 0px 39px 0px -24px #269adb;
-    box-shadow:inset 0px 39px 0px -24px #269adb;
-    background-color:#269adb;
-}
-
-.table-options-buttons-remove, .modal-buttons-remove {
+.main-view-remove-btn, .modal-buttons-remove {
     -moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
     -webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
     box-shadow:inset 0px 39px 0px -24px #e67a73;
@@ -111,4 +94,13 @@ tbody{
     color: white;
     font-size: 1.6rem;
     font-weight: 700;
+}
+
+td.select {
+    display: flex;
+    justify-content: center;
+}
+
+.highlighted {
+    background-color: rgb(221, 221, 221);
 }

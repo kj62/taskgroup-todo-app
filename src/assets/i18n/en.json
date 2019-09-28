@@ -3,7 +3,7 @@
         "HEADERS": {
             "NAME": "Name",
             "NUMBER_OF_TASKS": "Number of tasks",
-            "OPTIONS": "Options",
+            "OPTIONS": "Selection",
             "DEADLINE": "Deadline",
             "USER_ID": "UserId",
             "STATUS": "Status"

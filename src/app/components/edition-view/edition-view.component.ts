@@ -11,6 +11,7 @@ import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class EditionViewComponent implements OnInit {
 
+  public taskGroupName: string;
   public userTasks: UserTask[];
   public userTaskForm: FormGroup;
   public name: FormControl;
@@ -24,6 +25,7 @@ export class EditionViewComponent implements OnInit {
     private formBuilder: FormBuilder
   )
   {
+    this.taskGroupName = "";
     this.name = new FormControl('');
     this.deadline = new FormControl('');
     this.userId = new FormControl('');
@@ -38,20 +40,6 @@ export class EditionViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userTasks = [
-      {
-        "name": "task1",
-        "deadline": new Date(),
-        "userId": "asadafafasf",
-        "status": "New"
-      },
-      {
-        "name": "task2",
-        "deadline": new Date(),
-        "userId": "fasf",
-        "status": "New"
-      }
-    ];
   }
 
 }

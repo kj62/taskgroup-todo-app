@@ -20,4 +20,8 @@ export class RestApiService {
   createTaskGroup<T>(url, body) {
     return this.httpClient.post<T>(url, body);
   }
+
+  removeTaskGroup<T>(url) {
+    return this.httpClient.delete<T>(url);
+  }
 }
