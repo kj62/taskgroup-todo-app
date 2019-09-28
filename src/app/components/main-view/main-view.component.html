@@ -9,7 +9,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let taskGroup of taskGroupList; let i = index"
-                (click)="selectRow(i)"
+                (click)="selectRow(i, taskGroup)"
                 [class.highlighted]="i === selectedTaskGroupIndex"
             >
                 <td>{{taskGroup.name}}</td>
@@ -23,16 +23,16 @@
     <div class="main-view-add-btn-box">
         <button class="main-view-btn main-view-add-btn" (click)="createTaskGroupClickHandler()">{{ 'APP.BUTTONS.ADD_TASK' | translate }}</button>
         <button class="main-view-btn main-view-edit-btn" (click)="editTaskGroupClickHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.EDIT' | translate }}</button>
-        <button class="main-view-btn main-view-remove-btn" (click)="removeTaskGroupClickHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+        <button class="main-view-btn main-view-remove-btn" (click)="removeTaskGroupClickHandler(selectedTaskGroup?.name)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
     </div>
 </div>
 
 <ngx-smart-modal #removalConfirmationModal identifier="removalConfirmationModal" title="{{ 'APP.MODAL.TITLE' | translate }}">
     <div class="modal-content-question">
-        <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }} {{selectedTaskGroup}}</p>
+        <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }} {{selectedTaskGroup.name}}</p>
     </div>
     <div class="modal-buttons">
-        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupConfirmHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupConfirmHandler(selectedTaskGroup?.name)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
         <button class="modal-buttons-cancel" (click)="closeModalHandler()">{{ 'APP.BUTTONS.CANCEL' | translate }}</button>
     </div>
 </ngx-smart-modal>

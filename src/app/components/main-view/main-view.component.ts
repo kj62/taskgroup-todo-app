@@ -19,7 +19,7 @@ export class MainViewComponent implements OnInit {
 
   public taskGroupList: TaskGroup[];
   public taskGroup: TaskGroup;
-  public selectedTaskGroup: TaskGroup;
+  public selectedTaskGroup: any;
   public selectedTaskGroupIndex: number;
   public userTasks: UserTask[];
 
@@ -31,12 +31,12 @@ export class MainViewComponent implements OnInit {
     private ngxSmartModalService: NgxSmartModalService
   )
   {
+    this.selectedTaskGroup = this.sharingService.getSelectedTaskGroup();
   }
 
   ngOnInit() {
     this.taskGroupList = new Array<any>();
     this.taskGroup = new TaskGroup();
-    this.selectedTaskGroup = new TaskGroup();
     this.userTasks = new Array<UserTask>();
     this.selectedTaskGroupIndex = undefined;
 
@@ -52,7 +52,17 @@ export class MainViewComponent implements OnInit {
     });
   }
 
+  getTaskGroupListHandler() {
+    this.taskGroupList.length = 0;
+    this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
+      response.forEach((taskGr) => {
+        this.taskGroupList.push(taskGr);
+      });
+    });
+  }
+
   removeTaskGroupClickHandler(taskGroup: TaskGroup) {
+    this.sharingService.setSelectedTaskGroup(taskGroup);
     this.ngxSmartModalService.getModal("removalConfirmationModal").open();
   }
 
@@ -65,12 +75,10 @@ export class MainViewComponent implements OnInit {
     this.sharingService.route("edition");
   }
 
-  removeSelectedTaskGroupConfirmHandler(selectedTaskGroup) {
-    console.log("TGSelected: " + selectedTaskGroup);
-    this.restApiService.removeTaskGroup(Settings.URL + '/taskGroupList/' + selectedTaskGroup).subscribe((response) => {
-      this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-        // this.taskGroupList = response;
-        console.log("Subs: " + JSON.stringify(response));
+  removeSelectedTaskGroupConfirmHandler(selectedTaskGroupName) {
+    this.restApiService.removeTaskGroup(Settings.URL + '/taskGroupList/' + selectedTaskGroupName).subscribe((response) => {
+      this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
+        this.getTaskGroupListHandler();
         this.ngxSmartModalService.getModal("removalConfirmationModal").close();
       });
     });
@@ -80,8 +88,9 @@ export class MainViewComponent implements OnInit {
     this.ngxSmartModalService.getModal("removalConfirmationModal").close();
   }
 
-  selectRow(taskGroupSelectedIndex) {
+  selectRow(taskGroupSelectedIndex, taskGroupSelected) {
     this.selectedTaskGroupIndex = taskGroupSelectedIndex;
+    this.selectedTaskGroup = taskGroupSelected;
   }
 
 }
