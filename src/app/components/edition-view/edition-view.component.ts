@@ -73,22 +73,6 @@ export class EditionViewComponent implements OnInit, OnDestroy {
         });
       });
     }
-    else {
-      this.taskGroupSelected = new TaskGroup();
-      // this.taskGroupSelected["name"] = 
-      // this.taskGroupSelected['userTasks'] = this.userTaskForm;
-      this.restApiService.createTaskGroup(Settings.URL + '/taskGroupList', this.taskGroupSelected).subscribe((response) => {
-        this.taskGroupList.length = 0;
-        this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
-          resp.forEach((taskGr, index) => {
-            if(index === 0) {
-              this.taskGroupSelected = taskGr;
-            }
-            this.taskGroupList.push(taskGr);
-          });
-        });
-      });
-    }
   }
 
   acceptEditionHandler(taskToEdit) {
@@ -139,6 +123,10 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   //     });
   //   });
   // }
+
+  goBack() {
+    this.sharingService.route("/");
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

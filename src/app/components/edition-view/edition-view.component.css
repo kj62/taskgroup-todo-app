@@ -139,3 +139,17 @@ button.form-submit-btn {
     box-shadow:inset 0px 39px 0px -24px #64ac48;
     background-color:#64ac48;
 }
+
+button.btn-back {
+    margin-left: 1rem;
+    margin-top: 3rem;
+    width: 20rem;
+    height: 3rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+    -moz-box-shadow:inset 0px 39px 0px -24px #269adb;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #269adb;
+    box-shadow:inset 0px 39px 0px -24px #269adb;
+    background-color:#269adb;
+}

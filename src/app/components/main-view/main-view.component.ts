@@ -75,7 +75,27 @@ export class MainViewComponent implements OnInit {
   }
 
   createTaskGroupClickHandler() {
-    this.sharingService.setSelectedTaskGroup(null);
+    let newTaskGroup = new TaskGroup();
+    newTaskGroup = {
+      "name": "newTaskGroup",
+      "userTasks": []
+    };
+    newTaskGroup["id"] = newTaskGroup["name"];
+    this.selectedTaskGroup = newTaskGroup;
+    this.restApiService.createTaskGroup(Settings.URL + '/taskGroupList/', this.selectedTaskGroup).subscribe((resp) => {
+      this.taskGroupList.length = 0;
+      this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
+        response.forEach((taskGr, index) => {
+          if(index === 0) {
+            this.selectedTaskGroup = taskGr;
+          }
+          this.taskGroupList.push(taskGr);
+        });
+        this.sharingService.setSelectedTaskGroup(this.selectedTaskGroup);
+        this.sharingService.route('edition');
+      });
+    })
+    this.sharingService.setSelectedTaskGroup(this.selectedTaskGroup);
     this.sharingService.route("edition");
   }
 

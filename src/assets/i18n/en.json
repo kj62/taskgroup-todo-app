@@ -25,7 +25,8 @@
             "CANCEL": "Cancel",
             "ADD_TASK": "Add task",
             "ADD_GROUP": "Add task group",
-            "ACCEPT_EDITION": "Accept edition"
+            "ACCEPT_EDITION": "Accept edition",
+            "BACK": "Go back"
         }
     }
 }
