@@ -1,3 +1,56 @@
+# TaskGroup-ToDo-App
+
+That is an example of semi-advanced ToDo App with TaskGroups (categories).
+
+It contains the functionalities of:
+- TaskGroup add/remove/edit operations,
+- UserTasks add/remove/edit operations.
+
+## Installation
+
+You should have [node](https://nodejs.org/en/download/) runtime installed on your machine.
+Use the [npm] (https://www.npmjs.com/) to install dependencies.
+
+In the main directory
+
+```bash
+npm install
+```
+
+Next it is necessary to run local json-server.
+
+1. Go to addons/fake-json-server and run
+
+```bash
+npm install
+```
+
+2. Navigate to /server-files and to start server on existing static file enter in the console:
+
+```bash
+json-server --p 8080 --watch <name-of-file.json>
+```
+
+If there is a problem with json-server command probably you need to run
+
+```bash
+npm install json-server -g
+```
+
+## Usage
+
+```bash
+npm start
+```
+
+That command starts the whole application.
+
+## Side Notes
+
+1. 
+
+------------------------------------------
+
 # TaskgroupTodoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
