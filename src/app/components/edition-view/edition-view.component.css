@@ -153,3 +153,7 @@ button.btn-back {
     box-shadow:inset 0px 39px 0px -24px #269adb;
     background-color:#269adb;
 }
+
+.validation-error{
+    border: 1px solid #f00;
+}

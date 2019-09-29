@@ -4,11 +4,9 @@ import {TranslateService} from '@ngx-translate/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import {RestApiService} from '../../services/rest-api.service';
 import {Settings} from '../../settings';
-import { UserTask } from '../../models/UserTask.model';
 import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { TaskGroup } from '../../models/taskGroup.model';
+import { TaskGroup, UserTask } from '../../models/mainObjects.model';
 import { Subscription } from 'rxjs';
-import { settings } from 'cluster';
 
 @Component({
   selector: 'app-edition-view',
@@ -26,6 +24,9 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   public userId: FormControl;
   public status: FormControl;
 
+  public validationErrorName: boolean;
+  public validationErrorStatus: boolean;
+
   private subscription: Subscription;
 
   constructor(
@@ -36,10 +37,10 @@ export class EditionViewComponent implements OnInit, OnDestroy {
     private ngxSmartModalService: NgxSmartModalService
   )
   {
-    this.name = new FormControl('');
+    this.name = new FormControl('', Validators.required);
     this.deadline = new FormControl('');
     this.userId = new FormControl('');
-    this.status = new FormControl('');
+    this.status = new FormControl({value: 'New', disabled: true}, Validators.required);
 
     this.userTaskForm = formBuilder.group({
       name: this.name,
@@ -52,6 +53,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.taskGroupList = new Array<any>();
       this.updatedTask = "";
+      this.validationErrorName = false;
+      this.validationErrorStatus = false;
       this.subscription = this.sharingService.getSelectedTaskGroup().subscribe((response) => {
         this.taskGroupSelected = response;
       });
@@ -59,19 +62,18 @@ export class EditionViewComponent implements OnInit, OnDestroy {
 
   addTask() {
     if(this.taskGroupSelected) {
-      this.taskGroupSelected.userTasks.push(this.userTaskForm.value);
-      this.restApiService.addTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.name,
-      this.taskGroupSelected).subscribe((response) => {
-        this.taskGroupList.length = 0;
-        this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
-          resp.forEach((taskGr, index) => {
-            if(index === 0) {
-              this.taskGroupSelected = taskGr;
-            }
-            this.taskGroupList.push(taskGr);
+      if(this.isFormValid()) {
+        this.taskGroupSelected.userTasks.push(this.userTaskForm.getRawValue());
+        this.restApiService.addTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.name, this.taskGroupSelected)
+        .subscribe((response) => {
+          this.taskGroupList.length = 0;
+          this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
+            resp.forEach((taskGr, index) => {
+              this.taskGroupList.push(taskGr);
+            });
           });
         });
-      });
+      }
     }
   }
 
@@ -81,9 +83,6 @@ export class EditionViewComponent implements OnInit, OnDestroy {
         this.taskGroupList.length = 0;
         this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
           resp.forEach((taskGr, index) => {
-            if(index === 0) {
-              this.taskGroupSelected = taskGr;
-            }
             this.taskGroupList.push(taskGr);
           });
           this.updatedTask = taskToEdit.name;
@@ -103,13 +102,15 @@ export class EditionViewComponent implements OnInit, OnDestroy {
         this.taskGroupList.length = 0;
         this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
           resp.forEach((taskGr, index) => {
-            if(index === 0) {
-              this.taskGroupSelected = taskGr;
-            }
             this.taskGroupList.push(taskGr);
           });
         });
       });
+  }
+
+  onTaskGroupNameChange(evt) {
+    this.taskGroupSelected.name = evt.target.taskGroupName.value;
+    this.sharingService.setSelectedTaskGroup(this.taskGroupSelected);
   }
 
   // That request would be used if json-server supported query parameters for DELETE method
@@ -123,6 +124,27 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   //     });
   //   });
   // }
+
+  isFormValid() {
+    if(this.userTaskForm.getRawValue()["name"] === "") {
+      this.validationErrorName = true;
+    }
+    else{
+      this.validationErrorName = false;
+    }
+    if(this.userTaskForm.getRawValue()["status"] === "") {
+      this.validationErrorStatus = true;
+    }
+    else {
+      this.validationErrorStatus = false;
+    }
+    if(this.validationErrorName || this.validationErrorStatus) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
 
   goBack() {
     this.sharingService.route("/");

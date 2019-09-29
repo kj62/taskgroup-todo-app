@@ -1,7 +1,12 @@
 <div id="edition-view">
     <div class="edition-view-main-box">
         <div class="edition-view-top-box">
-            <input type="text" name="taskGroupName" value="{{taskGroupSelected?.name}}"/>
+            <form (ngSubmit)="onTaskGroupNameChange($event)">
+                <input type="text" name="taskGroupName" value="{{taskGroupSelected?.name}}"/>
+            </form>
+            <button class="user-task-btn btn-task-accept-edit" (click)="handleTaskGroupChange()">
+                {{ 'APP.BUTTONS.ACCEPT_EDITION' | translate }}
+            </button>
         </div>
         <div class="edition-view-columns-box">
             <div class="edition-view-column-user-tasks-list">
@@ -39,9 +44,6 @@
                     </tbody>
                 </table>
                 <div class="add-group-btn-box">
-                    <button class="user-task-btn btn-group-add">
-                        {{ 'APP.BUTTONS.ADD_GROUP' | translate }}
-                    </button>
                     <button class="btn-back" (click)="goBack()">{{ 'APP.BUTTONS.BACK' | translate }}</button>
                 </div>
             </div>
@@ -49,7 +51,7 @@
                 <form [formGroup]="userTaskForm" class="user-task-form" (ngSubmit)="addTask()">
                     <div class="form-control-box">
                         <label for="name">{{ 'APP.HEADERS.NAME' | translate }}</label>
-                        <input type="text" name="name" formControlName="name"/>
+                        <input type="text" [class.validation-error]="validationErrorName" name="name" formControlName="name"/>
                     </div>
                     
                     <div class="form-control-box">
@@ -64,11 +66,7 @@
                     
                     <div class="form-control-box">
                         <label for="status">{{ 'APP.HEADERS.STATUS' | translate }}</label>
-                        <select name="status" formControlName="status">
-                            <option>{{ 'APP.TASK_STATUS.NEW' | translate }}</option>
-                            <option>{{ 'APP.TASK_STATUS.IN_PROGRESS' | translate }}</option>
-                            <option>{{ 'APP.TASK_STATUS.COMPLETED' | translate }}</option>
-                        </select>
+                        <input type="text" [class.validation-error]="validationErrorStatus" name="status" formControlName="status"/>
                     </div>
                     <button class="form-submit-btn" type="submit">{{ 'APP.BUTTONS.ADD_TASK' | translate }}</button>
                 </form>    

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TaskGroup } from '../models/taskGroup.model';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserTask } from '../models/UserTask.model';
+import { UserTask, TaskGroup } from '../models/mainObjects.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({

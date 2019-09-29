@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TaskGroup } from '../../models/taskGroup.model';
 import { SharingService } from '../../services/sharing.service';
 import { RestApiService } from '../../services/rest-api.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ViewChild } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { UserTask } from '../../models/UserTask.model';
 import {Settings} from '../../settings';
-import { User } from '../../models/user.model';
+import { User, UserTask, TaskGroup } from '../../models/mainObjects.model';
 
 @Component({
   selector: 'app-main-view',
@@ -19,7 +17,7 @@ export class MainViewComponent implements OnInit {
 
   public taskGroupList: TaskGroup[];
   public taskGroup: TaskGroup;
-  public selectedTaskGroup: any;
+  public selectedTaskGroup: TaskGroup;
   public selectedTaskGroupIndex: number;
   public userTasks: UserTask[];
 
@@ -35,7 +33,10 @@ export class MainViewComponent implements OnInit {
 
   ngOnInit() {
     this.taskGroupList = new Array<any>();
-    this.taskGroup = new TaskGroup();
+    this.taskGroup = {
+      "name": "",
+      "userTasks": []
+    };
     this.userTasks = new Array<UserTask>();
     this.selectedTaskGroupIndex = 0;
     this.initView();
@@ -43,7 +44,7 @@ export class MainViewComponent implements OnInit {
 
   initView() {
     this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-      response.forEach((taskGr, index) => {
+      response.forEach((taskGr: TaskGroup, index) => {
         if(index === 0) {
           this.selectedTaskGroup = taskGr;
         }
@@ -55,7 +56,7 @@ export class MainViewComponent implements OnInit {
   getTaskGroupListHandler() {
     this.taskGroupList.length = 0;
     this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-      response.forEach((taskGr, index) => {
+      response.forEach((taskGr: TaskGroup, index) => {
         if(index === 0) {
           this.selectedTaskGroup = taskGr;
         }
@@ -75,28 +76,21 @@ export class MainViewComponent implements OnInit {
   }
 
   createTaskGroupClickHandler() {
-    let newTaskGroup = new TaskGroup();
-    newTaskGroup = {
+    const newTaskGroup: TaskGroup = {
       "name": "newTaskGroup",
       "userTasks": []
     };
-    newTaskGroup["id"] = newTaskGroup["name"];
     this.selectedTaskGroup = newTaskGroup;
     this.restApiService.createTaskGroup(Settings.URL + '/taskGroupList/', this.selectedTaskGroup).subscribe((resp) => {
       this.taskGroupList.length = 0;
       this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-        response.forEach((taskGr, index) => {
-          if(index === 0) {
-            this.selectedTaskGroup = taskGr;
-          }
+        response.forEach((taskGr: TaskGroup, index) => {
           this.taskGroupList.push(taskGr);
         });
         this.sharingService.setSelectedTaskGroup(this.selectedTaskGroup);
         this.sharingService.route('edition');
       });
-    })
-    this.sharingService.setSelectedTaskGroup(this.selectedTaskGroup);
-    this.sharingService.route("edition");
+    });
   }
 
   removeSelectedTaskGroupConfirmHandler(selectedTaskGroupName) {
@@ -116,5 +110,4 @@ export class MainViewComponent implements OnInit {
     this.selectedTaskGroupIndex = taskGroupSelectedIndex;
     this.selectedTaskGroup = taskGroupSelected;
   }
-
 }
