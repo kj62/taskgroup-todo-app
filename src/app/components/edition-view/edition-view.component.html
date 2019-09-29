@@ -1,7 +1,7 @@
 <div id="edition-view">
     <div class="edition-view-main-box">
         <div class="edition-view-top-box">
-            <input type="text" name="taskGroupName" value="{{taskGroupSelected}}"/>
+            <input type="text" name="taskGroupName" value="{{taskGroupSelected?.name}}"/>
         </div>
         <div class="edition-view-columns-box">
             <div class="edition-view-column-user-tasks-list">
@@ -15,23 +15,37 @@
                             <td>{{ 'APP.HEADERS.OPTIONS' | translate }}</td>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let userTask of userTasks">
+                    <tbody *ngFor="let userTask of taskGroupSelected?.userTasks">
                         <tr>
-                            <td>{{userTask.name}}</td>
-                            <td>{{userTask.deadline}}</td>
-                            <td>{{userTask.userId}}</td>
-                            <td>{{userTask.status}}</td>
+                            <td><input type="text" name="userTaskName" value="{{userTask?.name}}" [(ngModel)]="userTask.name"/></td>
+                            <td><input type="text" name="userTaskDeadline" value="{{userTask?.deadline}}" [(ngModel)]="userTask.deadline"/></td>
+                            <td><input type="text" name="userTaskUserId" value="{{userTask?.userId}}" [(ngModel)]="userTask.userId"/></td>
+                            <td>
+                                <select [(ngModel)]="userTask.status">
+                                    <option>{{ 'APP.TASK_STATUS.NEW' | translate }}</option>
+                                    <option>{{ 'APP.TASK_STATUS.IN_PROGRESS' | translate }}</option>
+                                    <option>{{ 'APP.TASK_STATUS.COMPLETED' | translate }}</option>
+                                </select>
+                            </td>
                             <td class="user-tasks-table-options-buttons">
-                                <button class="user-tasks-table-options-buttons-remove" (click)="removeTaskGroupClickHandler(userTask)">
-                                    <span class="icon"></span>
+                                <button class="user-task-btn btn-task-accept-edit" (click)="acceptEditionHandler(userTask)">
+                                    {{ 'APP.BUTTONS.ACCEPT_EDITION' | translate }}
+                                </button>
+                                <button class="user-task-btn btn-task-remove" (click)="removeTaskHandler(userTask)">
+                                    {{ 'APP.BUTTONS.REMOVE' | translate }}
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="add-group-btn-box">
+                    <button class="user-task-btn btn-group-add">
+                        {{ 'APP.BUTTONS.ADD_GROUP' | translate }}
+                    </button>
+                </div>
             </div>
             <div class="edition-view-column-user-tasks-form">
-                <form [formGroup]="userTaskForm" class="user-task-form">
+                <form [formGroup]="userTaskForm" class="user-task-form" (ngSubmit)="addTask()">
                     <div class="form-control-box">
                         <label for="name">{{ 'APP.HEADERS.NAME' | translate }}</label>
                         <input type="text" name="name" formControlName="name"/>
@@ -50,9 +64,9 @@
                     <div class="form-control-box">
                         <label for="status">{{ 'APP.HEADERS.STATUS' | translate }}</label>
                         <select name="status" formControlName="status">
-                            <option >{{'ACTIVE' | translate}}</option>
-                            <option >{{'BLOCKED' | translate}}</option>
-                            <option >{{'CREATED' | translate}}</option>
+                            <option>{{ 'APP.TASK_STATUS.NEW' | translate }}</option>
+                            <option>{{ 'APP.TASK_STATUS.IN_PROGRESS' | translate }}</option>
+                            <option>{{ 'APP.TASK_STATUS.COMPLETED' | translate }}</option>
                         </select>
                     </div>
                     
@@ -63,12 +77,8 @@
     </div>
 </div>
 
-<ngx-smart-modal #removalConfirmationModal identifier="removalConfirmationModal" title="{{ 'APP.MODAL.TITLE' | translate }}">
+<ngx-smart-modal #updateConfirmationModal identifier="updateConfirmationModal" title="{{ 'APP.MODAL.UPDATE_TITLE' | translate }}">
     <div class="modal-content-question">
-        <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }}</p>
-    </div>
-    <div class="modal-buttons">
-        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupConfirmHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
-        <button class="modal-buttons-cancel" (click)="closeModalHandler()">{{ 'APP.BUTTONS.CANCEL' | translate }}</button>
+        <p>{{ 'APP.MODAL.UPDATE_INFO' | translate }} {{updatedTask}}</p>
     </div>
 </ngx-smart-modal>

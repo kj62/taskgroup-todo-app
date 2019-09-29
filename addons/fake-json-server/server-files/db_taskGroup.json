@@ -1,6 +1,7 @@
 {
   "taskGroupList": [
     {
+      "id": "Car",
       "name": "Car",
       "userTasks": [
         {
@@ -8,10 +9,17 @@
           "deadline": "03.07.2019",
           "userId": "asd",
           "status": "New"
+        },
+        {
+          "name": "t2",
+          "deadline": "03.07.2019",
+          "userId": "asddd",
+          "status": "InProgress"
         }
       ]
     },
     {
+      "id": "Work",
       "name": "Work",
       "userTasks": [
         {
@@ -19,6 +27,12 @@
           "deadline": "05.07.2019",
           "userId": "qwe",
           "status": "InProgress"
+        },
+        {
+          "name": "t3",
+          "deadline": "05.07.2019",
+          "userId": "qwe",
+          "status": "Completed"
         }
       ]
     }

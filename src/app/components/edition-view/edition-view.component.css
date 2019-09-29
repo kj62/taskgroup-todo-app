@@ -34,6 +34,7 @@ input[name="taskGroupName"] {
 
 .edition-view-column-user-tasks-list{
     display: flex;
+    flex-direction: column;
     width: 70%;
 }
 
@@ -90,9 +91,33 @@ tbody{
     font-weight: bold;
 }
 
-button.user-tasks-table-options-buttons-remove {
-    width: 2rem;
-    height: 2rem;
+button.user-task-btn {
+    margin-left: 1rem;
+    width: 12rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.btn-task-accept-edit, .btn-group-add {
+    -moz-box-shadow:inset 0px 39px 0px -24px #64ac48;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #64ac48;
+    box-shadow:inset 0px 39px 0px -24px #64ac48;
+    background-color:#64ac48;
+}
+
+button.user-task-btn.btn-group-add {
+    width: 20rem;
+    height: 3rem;
+    margin-left: 3rem;
+    margin-top: 3rem;
+}
+
+.btn-task-remove {
+    -moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+    box-shadow:inset 0px 39px 0px -24px #e67a73;
+    background-color:#e4685d;
 }
 
 button.user-tasks-table-options-buttons-remove span.icon{

@@ -3,47 +3,27 @@ import { TaskGroup } from '../models/taskGroup.model';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserTask } from '../models/UserTask.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharingService {
-  private taskGroupList: Subject<TaskGroup[]>;
-  private taskGroup: Subject<TaskGroup>;
-  private selectedTaskGroup: Subject<TaskGroup>;
-  private userTask: Subject<UserTask>;
-  private routeStack: Array<any>;
+  private taskGroupList: BehaviorSubject<TaskGroup[]>;
+  private taskGroup: BehaviorSubject<TaskGroup>;
+  private selectedTaskGroup: BehaviorSubject<TaskGroup>;
+  private userTask: BehaviorSubject<UserTask>;
 
   constructor(
     private router: Router
   ) {
-    this.taskGroupList = new Subject<TaskGroup[]>();
-    this.taskGroup = new Subject<TaskGroup>();
-    this.selectedTaskGroup = new Subject<TaskGroup>();
-    this.userTask = new Subject<UserTask>();
-    this.routeStack = [];
-  }
-
-  private setPreviousRoute(route: string) {
-    const r = { path: route };
-    this.routeStack.push(r);
-  }
-
-  private clearRouteStack() {
-    this.routeStack.length = 0;
-  }
-
-  routeBack() {
-    let { path } = this.routeStack.pop();
-    if (!path) {
-      path = '';
-    }
-    this.router.navigate([path]);
+    this.taskGroupList = new BehaviorSubject<TaskGroup[]>(null);
+    this.taskGroup = new BehaviorSubject<TaskGroup>(null);
+    this.selectedTaskGroup = new BehaviorSubject<TaskGroup>(null);
+    this.userTask = new BehaviorSubject<UserTask>(null);
   }
 
   route(path) {
-    this.setPreviousRoute(window.location.pathname);
     this.router.navigate([path]);
   }
 

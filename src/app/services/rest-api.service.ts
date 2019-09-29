@@ -24,4 +24,21 @@ export class RestApiService {
   removeTaskGroup<T>(url) {
     return this.httpClient.delete<T>(url);
   }
+
+  // That would be user if json-server supported query parameters for DELETE method
+  // removeTask<T>(url) {
+  //   return this.httpClient.delete<T>(url);
+  // }
+
+  removeTask<T>(url, body) {
+    return this.httpClient.put<T>(url, body);
+  }
+
+  updateTask<T>(url, body) {
+    return this.httpClient.put<T>(url, body);
+  }
+
+  addTask<T>(url, body) {
+    return this.httpClient.put<T>(url, body);
+  }
 }

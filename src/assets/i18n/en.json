@@ -15,13 +15,17 @@
         },
         "MODAL": {
             "TITLE": "Confirm removal",
-            "CONFIRMATION_QUESTION": "Are you sure you want to remove selected task group?"
+            "CONFIRMATION_QUESTION": "Are you sure you want to remove selected task group?",
+            "UPDATE_TITLE": "Update task",
+            "UPDATE_INFO": "You have updated task"
         },
         "BUTTONS": {
             "REMOVE": "Remove",
             "EDIT": "Edit",
             "CANCEL": "Cancel",
-            "ADD_TASK": "Add task"
+            "ADD_TASK": "Add task",
+            "ADD_GROUP": "Add task group",
+            "ACCEPT_EDITION": "Accept edition"
         }
     }
 }

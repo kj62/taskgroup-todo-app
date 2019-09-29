@@ -31,31 +31,34 @@ export class MainViewComponent implements OnInit {
     private ngxSmartModalService: NgxSmartModalService
   )
   {
-    this.selectedTaskGroup = this.sharingService.getSelectedTaskGroup();
   }
 
   ngOnInit() {
     this.taskGroupList = new Array<any>();
     this.taskGroup = new TaskGroup();
     this.userTasks = new Array<UserTask>();
-    this.selectedTaskGroupIndex = undefined;
-
+    this.selectedTaskGroupIndex = 0;
     this.initView();
   }
 
   initView() {
     this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-      response.forEach((taskGr) => {
+      response.forEach((taskGr, index) => {
+        if(index === 0) {
+          this.selectedTaskGroup = taskGr;
+        }
         this.taskGroupList.push(taskGr);
       });
-      console.log("Subs: " + JSON.stringify(response));
     });
   }
 
   getTaskGroupListHandler() {
     this.taskGroupList.length = 0;
     this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-      response.forEach((taskGr) => {
+      response.forEach((taskGr, index) => {
+        if(index === 0) {
+          this.selectedTaskGroup = taskGr;
+        }
         this.taskGroupList.push(taskGr);
       });
     });
@@ -72,6 +75,7 @@ export class MainViewComponent implements OnInit {
   }
 
   createTaskGroupClickHandler() {
+    this.sharingService.setSelectedTaskGroup(null);
     this.sharingService.route("edition");
   }
 
