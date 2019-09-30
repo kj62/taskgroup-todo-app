@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ViewChild } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import {Settings} from '../../settings';
+import {SortOrder, dynamicSortByNum, dynamicSortByName} from '../../utils/sorting';
 import { User, UserTask, TaskGroup } from '../../models/mainObjects.model';
 
 @Component({
@@ -20,6 +21,9 @@ export class MainViewComponent implements OnInit {
   public selectedTaskGroup: TaskGroup;
   public selectedTaskGroupIndex: number;
   public userTasks: UserTask[];
+
+  public SortOrder = SortOrder;
+  public taskGroupListSortOrder = SortOrder.Descending;
 
   constructor(
     private sharingService: SharingService,
@@ -109,5 +113,28 @@ export class MainViewComponent implements OnInit {
   selectRow(taskGroupSelectedIndex, taskGroupSelected) {
     this.selectedTaskGroupIndex = taskGroupSelectedIndex;
     this.selectedTaskGroup = taskGroupSelected;
+  }
+
+  sortTaskGroupByName() {
+    this.taskGroupList.sort(dynamicSortByName('name', this.taskGroupListSortOrder));
+  }
+
+  sortTaskGroupByTasksNum() {
+    this.taskGroupList.sort(dynamicSortByNum('userTasks', this.taskGroupListSortOrder));
+  }
+
+  toggleSortTaskGroupListOrder() {
+    this.taskGroupListSortOrder = this.toggleSortDirection(this.taskGroupListSortOrder);
+  }
+
+  toggleSortDirection(order: SortOrder) {
+    switch (order) {
+      case SortOrder.Ascending: {
+        return SortOrder.Descending;
+      }
+      case SortOrder.Descending: {
+        return SortOrder.Ascending;
+      }
+    }
   }
 }

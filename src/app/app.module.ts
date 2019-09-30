@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { EditionViewComponent } from './components/edition-view/edition-view.component';
-import { SortByPipe } from './pipes/sortBy.pipe';
 import { SharingService } from './services/sharing.service';
 import { RestApiService } from './services/rest-api.service';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
@@ -23,8 +22,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     MainViewComponent,
-    EditionViewComponent,
-    SortByPipe
+    EditionViewComponent
   ],
   imports: [
     BrowserModule,

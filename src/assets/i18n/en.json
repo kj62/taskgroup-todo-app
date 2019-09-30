@@ -26,7 +26,10 @@
             "ADD_TASK": "Add task",
             "ADD_GROUP": "Add task group",
             "ACCEPT_EDITION": "Accept edition",
-            "BACK": "Go back"
+            "BACK": "Go back",
+            "SORT_BY_NAME": "Sort by name",
+            "SORT_BY_TASKS_NUM": "Sort by tasks num",
+            "CHANGE_SORT_ORDER": "Change sorting order"
         }
     }
 }

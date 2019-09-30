@@ -71,6 +71,14 @@ tbody{
     background-color:#e4685d;
 }
 
+.main-view-change-sort-order-btn {
+    -moz-box-shadow:inset 0px 39px 0px -24px #dddddd;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #dddddd;
+    box-shadow:inset 0px 39px 0px -24px #dddddd;
+    background-color:#dddddd;
+    border-radius: 0.3rem;
+}
+
 .modal-content-question {
     font-size: 2rem;
     margin: 4rem 2rem 4rem 2rem;
@@ -96,11 +104,24 @@ tbody{
     font-weight: 700;
 }
 
+.btn-sort {
+    width: 12rem;
+    height: 2rem;
+    color: #6d6d6d;
+    font-size: 1.2rem;
+    font-weight: 400;
+    -moz-box-shadow:inset 0px 39px 0px -24px #dddddd;
+    -webkit-box-shadow:inset 0px 39px 0px -24px #dddddd;
+    box-shadow:inset 0px 39px 0px -24px #dddddd;
+    background-color:#dddddd;
+    border-radius: 0.3rem;
+}
+
 td.select {
     display: flex;
     justify-content: center;
 }
 
 .highlighted {
-    background-color: rgb(221, 221, 221);
+    background-color: #dddddd;
 }

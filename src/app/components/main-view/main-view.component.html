@@ -2,8 +2,14 @@
     <table class="main-view-table">
         <thead>
             <tr>
-                <td>{{ 'APP.HEADERS.NAME' | translate }}</td>
-                <td>{{ 'APP.HEADERS.NUMBER_OF_TASKS' | translate }}</td>
+                <td>
+                    {{ 'APP.HEADERS.NAME' | translate }}
+                    <button class="btn-sort" (click)="sortTaskGroupByName()">{{ 'APP.BUTTONS.SORT_BY_NAME' | translate }} </button>
+                </td>
+                <td>
+                    {{ 'APP.HEADERS.NUMBER_OF_TASKS' | translate }}
+                    <button class="btn-sort" (click)="sortTaskGroupByTasksNum()">{{ 'APP.BUTTONS.SORT_BY_TASKS_NUM' | translate }} </button>
+                </td>
                 <td>{{ 'APP.HEADERS.OPTIONS' | translate }}</td>
             </tr>
         </thead>
@@ -24,6 +30,7 @@
         <button class="main-view-btn main-view-add-btn" (click)="createTaskGroupClickHandler()">{{ 'APP.BUTTONS.ADD_GROUP' | translate }}</button>
         <button class="main-view-btn main-view-edit-btn" (click)="editTaskGroupClickHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.EDIT' | translate }}</button>
         <button class="main-view-btn main-view-remove-btn" (click)="removeTaskGroupClickHandler(selectedTaskGroup?.name)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+        <button class="main-view-btn main-view-change-sort-order-btn" (click)="toggleSortTaskGroupListOrder()">{{ 'APP.BUTTONS.CHANGE_SORT_ORDER' | translate }}</button>
     </div>
 </div>
 
