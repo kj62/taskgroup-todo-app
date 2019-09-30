@@ -77,7 +77,7 @@ export class MainViewComponent implements OnInit {
 
   createTaskGroupClickHandler() {
     const newTaskGroup: TaskGroup = {
-      "id": "newTaskGroupId",
+      "id": JSON.stringify(Date.now()),
       "name": "newTaskGroup",
       "userTasks": []
     };
