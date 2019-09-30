@@ -52,6 +52,7 @@ That command starts the whole application.
 	Normally, the ngx-bootstrap datepicker would be used.
 
 2. Code probably could be more DRY, but because of the small app size and lack of implementation time it has not been restructured.
+	Moreover in the edition view child components could be created, but for now (small app and data size) it was simpler to generate a single one.
 
 3. Unit tests are not implemented, because the developer has been 100% focused on the app functionality.
 
