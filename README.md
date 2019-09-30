@@ -30,6 +30,7 @@ npm install
 ```bash
 json-server --p 8080 --watch <name-of-file.json>
 ```
+The important thing is the port number 8080 - the app URLs are based on it.
 
 If there is a problem with json-server command probably you need to run
 
@@ -47,7 +48,16 @@ That command starts the whole application.
 
 ## Side Notes
 
-1. 
+1. Date format has been left due to lack of implementation time. The simple string has been used.
+
+2. Code probably could be more DRY, but because of the small app size and lack of implementation time it has not been restructured.
+
+3. Unit tests are not implemented, because the developer has been 100% focused on the app functionality.
+
+4. Styling could be done in SCSS, but plain CSS has been chosen.
+
+5. Probably the additional interface between REST API functions and the components could be written (indirect communication interface),
+	but the app is small and does not requires it.
 
 ------------------------------------------
 
