@@ -58,6 +58,9 @@ That command starts the whole application.
 
 5. Probably the additional interface between REST API functions and the components could be written (indirect communication interface),
 	but the app is small and does not requires it.
+	
+6. Task groups has additional field 'id'. That field is necessary for json-server to identify the resource.
+	When creating new Task Group the 'id' of stringifyied Date.now() value is assigned.
 
 ------------------------------------------
 
