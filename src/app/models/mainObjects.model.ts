@@ -16,4 +16,3 @@ export interface TaskGroup {
     name: string;
     userTasks: UserTask[];
 }
-

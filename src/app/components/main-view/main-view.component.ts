@@ -36,7 +36,7 @@ export class MainViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.taskGroupList = new Array<any>();
+    this.taskGroupList = new Array<TaskGroup>();
     this.taskGroup = {
       "id": "",
       "name": "",
@@ -44,6 +44,7 @@ export class MainViewComponent implements OnInit {
     };
     this.userTasks = new Array<UserTask>();
     this.selectedTaskGroupIndex = 0;
+
     this.initView();
   }
 
@@ -58,27 +59,21 @@ export class MainViewComponent implements OnInit {
     });
   }
 
-  getTaskGroupListHandler() {
-    this.taskGroupList.length = 0;
-    this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((response) => {
-      response.forEach((taskGr: TaskGroup, index) => {
-        if(index === 0) {
-          this.selectedTaskGroup = taskGr;
-        }
-        this.taskGroupList.push(taskGr);
-      });
-    });
-  }
+  // open remove modal
 
   removeTaskGroupClickHandler(taskGroup: TaskGroup) {
     this.sharingService.setSelectedTaskGroup(taskGroup);
     this.ngxSmartModalService.getModal("removalConfirmationModal").open();
   }
 
+  // set edited task group and navigate to edition view
+
   editTaskGroupClickHandler(taskGroup: TaskGroup) {
     this.sharingService.setSelectedTaskGroup(taskGroup);
     this.sharingService.route("edition");
   }
+
+  // create new task group and refresh view - REST API
 
   createTaskGroupClickHandler() {
     const newTaskGroup: TaskGroup = {
@@ -99,10 +94,19 @@ export class MainViewComponent implements OnInit {
     });
   }
 
+  // delete selected task group and refresh view - REST API
+
   removeSelectedTaskGroupConfirmHandler(selectedTaskGroupId) {
     this.restApiService.removeTaskGroup(Settings.URL + '/taskGroupList/' + selectedTaskGroupId).subscribe((response) => {
+      this.taskGroupList.length = 0;
       this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
-        this.getTaskGroupListHandler();
+        resp.forEach((taskGr: TaskGroup, index) => {
+          if(index === 0) {
+            this.selectedTaskGroupIndex = index;
+            this.selectedTaskGroup = taskGr;
+          }
+          this.taskGroupList.push(taskGr);
+        });
         this.ngxSmartModalService.getModal("removalConfirmationModal").close();
       });
     });
@@ -111,6 +115,8 @@ export class MainViewComponent implements OnInit {
   closeModalHandler() {
     this.ngxSmartModalService.getModal("removalConfirmationModal").close();
   }
+
+  // selected row highlight
 
   selectRow(taskGroupSelectedIndex, taskGroupSelected) {
     this.selectedTaskGroupIndex = taskGroupSelectedIndex;

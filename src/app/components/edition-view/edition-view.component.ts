@@ -55,6 +55,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
       "firstName": "",
       "lastName": ""
     };
+    
+    // join unassigned user with users array
     this.users = [unassignedUser].concat(this.sharingService.getUsers());
     this.taskGroupList = new Array<any>();
     this.updatedTask = null;
@@ -64,6 +66,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
       this.taskGroupSelected = response;
     });
   }
+
+  // add new task to selected task group from the form and refresh view - REST API
 
   addTask() {
     if(this.taskGroupSelected) {
@@ -82,6 +86,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  // accept selected task edit and refresh view - REST API
+
   acceptEditionHandler(taskToEdit) {
     this.restApiService.updateTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.id, this.taskGroupSelected)
     .subscribe((response) => {
@@ -95,6 +101,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
         });
       });
   }
+
+  // remove selected task and refresh view - REST API
 
   removeTaskHandler(taskToRemove) {
     const remainingTasks = this.taskGroupSelected.userTasks.filter((userTask) => {
@@ -112,6 +120,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
         });
       });
   }
+
+  // edit task group name and refresh view - REST API
 
   onTaskGroupNameChange(evt) {
     this.taskGroupSelected.name = evt.target.taskGroupName.value;
@@ -139,6 +149,8 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   //     });
   //   });
   // }
+
+  // check if form is valid
 
   isFormValid() {
     if(this.userTaskForm.getRawValue()["name"] === "") {
