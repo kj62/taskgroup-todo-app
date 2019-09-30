@@ -48,7 +48,8 @@ That command starts the whole application.
 
 ## Side Notes
 
-1. Date format has been left due to lack of implementation time. The simple string has been used.
+1. Date format has been left due to lack of implementation time. The simple string has been used for now.
+	Normally, the ngx-bootstrap datepicker would be used.
 
 2. Code probably could be more DRY, but because of the small app size and lack of implementation time it has not been restructured.
 
