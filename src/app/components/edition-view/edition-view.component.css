@@ -52,6 +52,10 @@ form{
     border: 0.1rem solid #000;
 }
 
+form.task-group {
+    margin-left: 0;
+}
+
 .form-control-box {
     height: 5rem;
 }

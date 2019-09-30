@@ -1,5 +1,5 @@
 export interface User {
-    id: string;
+    id: number;
     firstName: string;
     lastName: string;
 }
@@ -12,6 +12,7 @@ export interface UserTask {
 }
 
 export interface TaskGroup {
+    id: string;
     name: string;
     userTasks: UserTask[];
 }

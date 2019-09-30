@@ -18,8 +18,8 @@
                 (click)="selectRow(i, taskGroup)"
                 [class.highlighted]="i === selectedTaskGroupIndex"
             >
-                <td>{{taskGroup.name}}</td>
-                <td>{{taskGroup.userTasks.length}}</td>
+                <td>{{taskGroup?.name}}</td>
+                <td>{{taskGroup?.userTasks?.length}}</td>
                 <td class="select">
                     <input type="radio" id="selection" name="selection" [checked]="i===selectedTaskGroupIndex">
                 </td>
@@ -29,7 +29,7 @@
     <div class="main-view-add-btn-box">
         <button class="main-view-btn main-view-add-btn" (click)="createTaskGroupClickHandler()">{{ 'APP.BUTTONS.ADD_GROUP' | translate }}</button>
         <button class="main-view-btn main-view-edit-btn" (click)="editTaskGroupClickHandler(selectedTaskGroup)">{{ 'APP.BUTTONS.EDIT' | translate }}</button>
-        <button class="main-view-btn main-view-remove-btn" (click)="removeTaskGroupClickHandler(selectedTaskGroup?.name)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+        <button class="main-view-btn main-view-remove-btn" (click)="removeTaskGroupClickHandler(selectedTaskGroup?.id)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
         <button class="main-view-btn main-view-change-sort-order-btn" (click)="toggleSortTaskGroupListOrder()">{{ 'APP.BUTTONS.CHANGE_SORT_ORDER' | translate }}</button>
     </div>
 </div>
@@ -39,7 +39,7 @@
         <p>{{ 'APP.MODAL.CONFIRMATION_QUESTION' | translate }} {{selectedTaskGroup?.name}}</p>
     </div>
     <div class="modal-buttons">
-        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupConfirmHandler(selectedTaskGroup?.name)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
+        <button class="modal-buttons-remove" (click)="removeSelectedTaskGroupConfirmHandler(selectedTaskGroup?.id)">{{ 'APP.BUTTONS.REMOVE' | translate }}</button>
         <button class="modal-buttons-cancel" (click)="closeModalHandler()">{{ 'APP.BUTTONS.CANCEL' | translate }}</button>
     </div>
 </ngx-smart-modal>

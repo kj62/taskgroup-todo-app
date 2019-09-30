@@ -17,7 +17,8 @@
             "TITLE": "Confirm removal",
             "CONFIRMATION_QUESTION": "Are you sure you want to remove selected task group?",
             "UPDATE_TITLE": "Update task",
-            "UPDATE_INFO": "You have updated task"
+            "UPDATE_INFO": "You have updated task: ",
+            "UPDATE_GROUP_INFO": "You have updated group: "
         },
         "BUTTONS": {
             "REMOVE": "Remove",

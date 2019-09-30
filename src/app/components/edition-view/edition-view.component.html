@@ -1,12 +1,12 @@
 <div id="edition-view">
     <div class="edition-view-main-box">
         <div class="edition-view-top-box">
-            <form (ngSubmit)="onTaskGroupNameChange($event)">
-                <input type="text" name="taskGroupName" value="{{taskGroupSelected?.name}}"/>
+            <form class="task-group" (ngSubmit)="onTaskGroupNameChange($event)">
+                <input type="text" name="taskGroupName" value="{{taskGroupSelected?.name}}" [(ngModel)]="taskGroupSelected.name"/>
+                <button class="user-task-btn btn-task-accept-edit" type="submit">
+                    {{ 'APP.BUTTONS.ACCEPT_EDITION' | translate }}
+                </button>
             </form>
-            <button class="user-task-btn btn-task-accept-edit" (click)="handleTaskGroupChange()">
-                {{ 'APP.BUTTONS.ACCEPT_EDITION' | translate }}
-            </button>
         </div>
         <div class="edition-view-columns-box">
             <div class="edition-view-column-user-tasks-list">
@@ -24,9 +24,14 @@
                         <tr>
                             <td><input type="text" name="userTaskName" value="{{userTask?.name}}" [(ngModel)]="userTask.name"/></td>
                             <td><input type="text" name="userTaskDeadline" value="{{userTask?.deadline}}" [(ngModel)]="userTask.deadline"/></td>
-                            <td><input type="text" name="userTaskUserId" value="{{userTask?.userId}}" [(ngModel)]="userTask.userId"/></td>
                             <td>
-                                <select [(ngModel)]="userTask.status">
+                                <select name="userTaskUserId" [(ngModel)]="userTask.userId">
+                                    <option *ngFor="let user of users">
+                                        {{ user.firstName }} {{ user.lastName }}
+                                    </option>
+                                </select>
+                            <td>
+                                <select name="userTaskStatus" [(ngModel)]="userTask.status">
                                     <option>{{ 'APP.TASK_STATUS.NEW' | translate }}</option>
                                     <option>{{ 'APP.TASK_STATUS.IN_PROGRESS' | translate }}</option>
                                     <option>{{ 'APP.TASK_STATUS.COMPLETED' | translate }}</option>
@@ -60,11 +65,6 @@
                     </div>
                     
                     <div class="form-control-box">
-                        <label for="userId">{{ 'APP.HEADERS.USER_ID' | translate }}</label>
-                        <input type="text" name="userId" formControlName="userId"/>
-                    </div>
-                    
-                    <div class="form-control-box">
                         <label for="status">{{ 'APP.HEADERS.STATUS' | translate }}</label>
                         <input type="text" [class.validation-error]="validationErrorStatus" name="status" formControlName="status"/>
                     </div>
@@ -78,5 +78,11 @@
 <ngx-smart-modal #updateConfirmationModal identifier="updateConfirmationModal" title="{{ 'APP.MODAL.UPDATE_TITLE' | translate }}">
     <div class="modal-content-question">
         <p>{{ 'APP.MODAL.UPDATE_INFO' | translate }} {{updatedTask}}</p>
+    </div>
+</ngx-smart-modal>
+
+<ngx-smart-modal #updateGroupConfirmationModal identifier="updateGroupConfirmationModal" title="{{ 'APP.MODAL.UPDATE_TITLE' | translate }}">
+    <div class="modal-content-question">
+        <p>{{ 'APP.MODAL.UPDATE_GROUP_INFO' | translate }} {{taskGroupSelected?.name}}</p>
     </div>
 </ngx-smart-modal>

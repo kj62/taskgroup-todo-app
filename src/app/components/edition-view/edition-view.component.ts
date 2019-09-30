@@ -5,7 +5,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 import {RestApiService} from '../../services/rest-api.service';
 import {Settings} from '../../settings';
 import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { TaskGroup, UserTask } from '../../models/mainObjects.model';
+import { TaskGroup, UserTask, User } from '../../models/mainObjects.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,17 +15,18 @@ import { Subscription } from 'rxjs';
 })
 export class EditionViewComponent implements OnInit, OnDestroy {
 
-  public taskGroupSelected: any;
-  public taskGroupList: any;
-  public updatedTask: string;
+  public taskGroupSelected: TaskGroup;
+  public taskGroupList: TaskGroup[];
+  public updatedTask: UserTask;
   public userTaskForm: FormGroup;
   public name: FormControl;
   public deadline: FormControl;
-  public userId: FormControl;
   public status: FormControl;
 
   public validationErrorName: boolean;
   public validationErrorStatus: boolean;
+
+  public users: User[];
 
   private subscription: Subscription;
 
@@ -39,36 +40,40 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   {
     this.name = new FormControl('', Validators.required);
     this.deadline = new FormControl('');
-    this.userId = new FormControl('');
     this.status = new FormControl({value: 'New', disabled: true}, Validators.required);
 
     this.userTaskForm = formBuilder.group({
       name: this.name,
       deadline: this.deadline,
-      userId: this.userId,
       status: this.status
     });
   }
 
   ngOnInit() {
-      this.taskGroupList = new Array<any>();
-      this.updatedTask = "";
-      this.validationErrorName = false;
-      this.validationErrorStatus = false;
-      this.subscription = this.sharingService.getSelectedTaskGroup().subscribe((response) => {
-        this.taskGroupSelected = response;
-      });
+    const unassignedUser: User = {
+      "id": 0,
+      "firstName": "",
+      "lastName": ""
+    };
+    this.users = [unassignedUser].concat(this.sharingService.getUsers());
+    this.taskGroupList = new Array<any>();
+    this.updatedTask = null;
+    this.validationErrorName = false;
+    this.validationErrorStatus = false;
+    this.subscription = this.sharingService.getSelectedTaskGroup().subscribe((response) => {
+      this.taskGroupSelected = response;
+    });
   }
 
   addTask() {
     if(this.taskGroupSelected) {
       if(this.isFormValid()) {
         this.taskGroupSelected.userTasks.push(this.userTaskForm.getRawValue());
-        this.restApiService.addTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.name, this.taskGroupSelected)
+        this.restApiService.addTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.id, this.taskGroupSelected)
         .subscribe((response) => {
           this.taskGroupList.length = 0;
           this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
-            resp.forEach((taskGr, index) => {
+            resp.forEach((taskGr: TaskGroup, index) => {
               this.taskGroupList.push(taskGr);
             });
           });
@@ -78,11 +83,11 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   }
 
   acceptEditionHandler(taskToEdit) {
-    this.restApiService.updateTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.name,
-      this.taskGroupSelected).subscribe((response) => {
+    this.restApiService.updateTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.id, this.taskGroupSelected)
+    .subscribe((response) => {
         this.taskGroupList.length = 0;
         this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
-          resp.forEach((taskGr, index) => {
+          resp.forEach((taskGr: TaskGroup, index) => {
             this.taskGroupList.push(taskGr);
           });
           this.updatedTask = taskToEdit.name;
@@ -97,11 +102,11 @@ export class EditionViewComponent implements OnInit, OnDestroy {
     });
     this.taskGroupSelected.userTasks.length = 0;
     this.taskGroupSelected.userTasks = [].concat(remainingTasks);
-    this.restApiService.removeTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.name,
+    this.restApiService.removeTask(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.id,
       this.taskGroupSelected).subscribe((response) => {
         this.taskGroupList.length = 0;
         this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
-          resp.forEach((taskGr, index) => {
+          resp.forEach((taskGr: TaskGroup, index) => {
             this.taskGroupList.push(taskGr);
           });
         });
@@ -111,6 +116,16 @@ export class EditionViewComponent implements OnInit, OnDestroy {
   onTaskGroupNameChange(evt) {
     this.taskGroupSelected.name = evt.target.taskGroupName.value;
     this.sharingService.setSelectedTaskGroup(this.taskGroupSelected);
+    this.restApiService.updateTaskGroup(Settings.URL + '/taskGroupList/' + this.taskGroupSelected.id, this.taskGroupSelected)
+    .subscribe((response) => {
+      this.taskGroupList.length = 0;
+      this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
+        resp.forEach((taskGr: TaskGroup, index) => {
+          this.taskGroupList.push(taskGr);
+        });
+        this.ngxSmartModalService.getModal("updateGroupConfirmationModal").open();
+      });
+    });
   }
 
   // That request would be used if json-server supported query parameters for DELETE method

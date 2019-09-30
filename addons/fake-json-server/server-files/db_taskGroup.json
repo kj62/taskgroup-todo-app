@@ -7,14 +7,8 @@
         {
           "name": "t1",
           "deadline": "03.07.2019",
-          "userId": "asd",
+          "userId": "Maciej Kowalski",
           "status": "New"
-        },
-        {
-          "name": "t2",
-          "deadline": "03.07.2019",
-          "userId": "asddd",
-          "status": "InProgress"
         }
       ]
     },
@@ -35,11 +29,6 @@
           "status": "Completed"
         }
       ]
-    },
-    {
-      "name": "newTaskGroup",
-      "userTasks": [],
-      "id": "oMYOGJU"
     }
   ],
   "users": [

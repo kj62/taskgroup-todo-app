@@ -38,6 +38,7 @@ export class MainViewComponent implements OnInit {
   ngOnInit() {
     this.taskGroupList = new Array<any>();
     this.taskGroup = {
+      "id": "",
       "name": "",
       "userTasks": []
     };
@@ -81,6 +82,7 @@ export class MainViewComponent implements OnInit {
 
   createTaskGroupClickHandler() {
     const newTaskGroup: TaskGroup = {
+      "id": "newTaskGroupId",
       "name": "newTaskGroup",
       "userTasks": []
     };
@@ -97,8 +99,8 @@ export class MainViewComponent implements OnInit {
     });
   }
 
-  removeSelectedTaskGroupConfirmHandler(selectedTaskGroupName) {
-    this.restApiService.removeTaskGroup(Settings.URL + '/taskGroupList/' + selectedTaskGroupName).subscribe((response) => {
+  removeSelectedTaskGroupConfirmHandler(selectedTaskGroupId) {
+    this.restApiService.removeTaskGroup(Settings.URL + '/taskGroupList/' + selectedTaskGroupId).subscribe((response) => {
       this.restApiService.getTaskGroupList(Settings.URL + '/taskGroupList').subscribe((resp) => {
         this.getTaskGroupListHandler();
         this.ngxSmartModalService.getModal("removalConfirmationModal").close();
